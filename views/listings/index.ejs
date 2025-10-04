@@ -1,0 +1,225 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  body {
+    background: #f8f9fa;
+  }
+
+  /* --- FILTER BAR --- */
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: start;
+    gap: 1.5rem;
+    margin: 1rem 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .filter {
+    text-align: center;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    flex: 0 0 auto;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+
+  .filter i {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 0.3rem;
+  }
+
+  .filter p {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 0;
+  }
+
+  /* --- TAX TOGGLE --- */
+  .tax-toggle {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  .tax-toggle label {
+    font-size: 0.9rem;
+    color: #333;
+  }
+
+  /* --- CARD GRID --- */
+  .listing-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .listing-card {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: #fff;
+  }
+
+  .listing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 18rem;
+    border-radius: 18px 18px 0 0;
+  }
+
+  .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .listing-card:hover .card-img-top {
+    transform: scale(1.05);
+  }
+
+  .img-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.4));
+    pointer-events: none;
+  }
+
+  .price-tag {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #111;
+  }
+
+  .listing-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 0.25rem;
+  }
+
+  .listing-subtext {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .tax-info {
+    color: #888;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    #filters {
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 1rem;
+    }
+
+    .tax-toggle {
+      margin-left: 0;
+    }
+
+    .card-img-wrapper {
+      height: 15rem;
+    }
+  }
+</style>
+
+<!-- FILTER BAR -->
+<div id="filters">
+  <div class="filter"><i class="fa-solid fa-fire"></i><p>Trending</p></div>
+  <div class="filter"><i class="fa-solid fa-bed"></i><p>Iconic Cities</p></div>
+  <div class="filter"><i class="fa-solid fa-mountain"></i><p>Mountains</p></div>
+  <div class="filter"><i class="fa-solid fa-fort-awesome"></i><p>Castles</p></div>
+  <div class="filter"><i class="fa-solid fa-person-swimming"></i><p>Pools</p></div>
+  <div class="filter"><i class="fa-solid fa-cow"></i><p>Farms</p></div>
+  <div class="filter"><i class="fa-regular fa-snowflake"></i><p>Arctic</p></div>
+  <div class="filter"><i class="fa-solid fa-campground"></i><p>Camping</p></div>
+
+  <div class="tax-toggle">
+    <div class="form-check form-switch m-0">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="taxSwitch"
+      />
+      <label class="form-check-label" for="taxSwitch">Show total after taxes</label>
+    </div>
+  </div>
+</div>
+
+<!-- LISTINGS GRID -->
+<div class="container mt-4">
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+    <% for(let listing of allListings) { %>
+      <div class="col">
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+          <div class="card listing-card shadow-sm">
+            <div class="card-img-wrapper position-relative">
+              <img
+                src="<%= listing.image.url %>"
+                class="card-img-top"
+                alt="<%= listing.title %>"
+              />
+              <div class="img-overlay"></div>
+              <div class="price-tag">
+                ₹<%= listing.price.toLocaleString("en-IN") %>/night
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h5 class="listing-title"><%= listing.title %></h5>
+              <p class="listing-subtext">
+                <i class="fa-solid fa-location-dot me-1"></i>
+                <%= listing.location || "India" %>
+              </p>
+              <p class="listing-price mb-0">
+                <span class="tax-info d-none">+18% GST included</span>
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<script>
+  // TAX SWITCH LOGIC
+  const taxSwitch = document.getElementById("taxSwitch");
+  if (taxSwitch) {
+    taxSwitch.addEventListener("change", () => {
+      document.querySelectorAll(".tax-info").forEach(info => {
+        info.classList.toggle("d-none", !taxSwitch.checked);
+      });
+    });
+  }
+</script>

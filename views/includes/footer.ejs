@@ -1,0 +1,140 @@
+<style>
+  footer {
+    background-color: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    padding: 2.5rem 0 1.5rem 0;
+    color: #4b5563;
+    font-size: 0.95rem;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    row-gap: 2rem;
+  }
+
+  .footer-section {
+    flex: 1 1 220px;
+    min-width: 200px;
+  }
+
+  .footer-brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #111827;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-section p {
+    color: #6b7280;
+    margin: 0.25rem 0;
+  }
+
+  .footer-links a {
+    display: block;
+    color: #4b5563;
+    text-decoration: none;
+    margin-bottom: 0.4rem;
+    transition: color 0.2s ease;
+  }
+
+  .footer-links a:hover {
+    color: #fe424d;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  .footer-socials a {
+    color: #4b5563;
+    font-size: 1.4rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+  }
+
+  .footer-socials a:hover {
+    color: #fe424d;
+    transform: scale(1.15);
+  }
+
+  .footer-bottom {
+    text-align: center;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    color: #6b7280;
+  }
+
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+
+    .footer-section {
+      flex: 1 1 100%;
+    }
+
+    .footer-links a {
+      display: inline-block;
+      margin: 0 0.5rem;
+    }
+
+    .footer-socials {
+      justify-content: center;
+    }
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+
+    <!-- Brand & About -->
+    <div class="footer-section">
+      <div class="footer-brand">Wanderlust</div>
+      <p>Discover unique stays, explore new destinations, and share unforgettable experiences around the world.</p>
+      <div class="footer-socials">
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+          <i class="fa-brands fa-square-facebook"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+          <i class="fa-brands fa-square-instagram"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Explore Links -->
+    <div class="footer-section footer-links">
+      <h6 class="fw-semibold text-dark mb-2">Explore</h6>
+      <a href="/listings">Destinations</a>
+      <a href="/listings/new">Host your home</a>
+      <a href="/about">About Us</a>
+      <a href="/contact">Contact</a>
+    </div>
+
+    <!-- Support Links -->
+    <div class="footer-section footer-links">
+      <h6 class="fw-semibold text-dark mb-2">Support</h6>
+      <a href="/help">Help Center</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms & Conditions</a>
+      <a href="/faq">FAQs</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    &copy; <%= new Date().getFullYear() %> Wanderlust Private Limited. All rights reserved.
+  </div>
+</footer>
