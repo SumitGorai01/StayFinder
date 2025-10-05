@@ -2,57 +2,65 @@
 
 <style>
   body {
-    background: #f8f9fa;
+    background: #f9fafb;
+    font-family: 'Inter', sans-serif;
+    color: #222;
   }
 
-  /* --- FILTER BAR --- */
+  /* ---------- FILTER BAR ---------- */
   #filters {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: start;
     gap: 1.5rem;
-    margin: 1rem 2rem;
-    padding-bottom: 0.5rem;
+    margin: 1.5rem 2rem;
+    padding-bottom: 0.75rem;
     border-bottom: 1px solid #e5e7eb;
   }
 
   .filter {
     text-align: center;
-    opacity: 0.6;
-    transition: all 0.3s ease;
+    opacity: 0.7;
+    transition: all 0.25s ease;
     cursor: pointer;
     flex: 0 0 auto;
   }
 
   .filter:hover {
     opacity: 1;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 
   .filter i {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #333;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.25rem;
   }
 
   .filter p {
-    font-size: 0.85rem;
+    font-size: 0.83rem;
     color: #555;
     margin: 0;
+    font-weight: 500;
   }
 
-  /* --- TAX TOGGLE --- */
+  /* ---------- TAX TOGGLE ---------- */
   .tax-toggle {
     margin-left: auto;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.6rem 1rem;
-    border: 1px solid #ccc;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #ddd;
     border-radius: 2rem;
     background: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+  }
+
+  .tax-toggle:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
   }
 
   .tax-toggle label {
@@ -60,29 +68,37 @@
     color: #333;
   }
 
-  /* --- CARD GRID --- */
+  /* ---------- CARD GRID ---------- */
   .listing-link {
     text-decoration: none;
     color: inherit;
+  }
+
+  .row > .col {
+    display: flex;
   }
 
   .listing-card {
     border: none;
     border-radius: 18px;
     overflow: hidden;
-    transition: all 0.3s ease;
     background: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   }
 
   .listing-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
   }
 
   .card-img-wrapper {
     position: relative;
     overflow: hidden;
-    height: 18rem;
+    aspect-ratio: 16 / 10;
     border-radius: 18px 18px 0 0;
   }
 
@@ -90,11 +106,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, filter 0.4s ease;
   }
 
   .listing-card:hover .card-img-top {
     transform: scale(1.05);
+    filter: brightness(0.95);
   }
 
   .img-overlay {
@@ -102,38 +119,71 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 40%;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.4));
+    height: 50%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent);
     pointer-events: none;
   }
 
   .price-tag {
     position: absolute;
-    bottom: 0.75rem;
-    left: 0.75rem;
-    background: rgba(255, 255, 255, 0.85);
-    padding: 0.4rem 0.8rem;
+    bottom: 0.8rem;
+    left: 0.8rem;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.45rem 0.9rem;
     border-radius: 12px;
     font-size: 0.9rem;
     font-weight: 600;
     color: #111;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  /* ---------- CARD BODY ---------- */
+  .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    margin: 15px;
   }
 
   .listing-title {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: #222;
-    margin-bottom: 0.25rem;
+    color: #111;
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
   }
 
   .listing-subtext {
     font-size: 0.9rem;
     color: #666;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .listing-subtext i {
+    color: #ff385c;
+  }
+
+  .listing-price {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: #222;
   }
 
   .tax-info {
     color: #888;
     font-size: 0.85rem;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 992px) {
+    .row {
+      row-gap: 2rem;
+    }
   }
 
   @media (max-width: 768px) {
@@ -148,12 +198,12 @@
     }
 
     .card-img-wrapper {
-      height: 15rem;
+      aspect-ratio: 16 / 11;
     }
   }
 </style>
 
-<!-- FILTER BAR -->
+<!-- ---------- FILTER BAR ---------- -->
 <div id="filters">
   <div class="filter"><i class="fa-solid fa-fire"></i><p>Trending</p></div>
   <div class="filter"><i class="fa-solid fa-bed"></i><p>Iconic Cities</p></div>
@@ -166,24 +216,20 @@
 
   <div class="tax-toggle">
     <div class="form-check form-switch m-0">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        id="taxSwitch"
-      />
+      <input class="form-check-input" type="checkbox" id="taxSwitch" />
       <label class="form-check-label" for="taxSwitch">Show total after taxes</label>
     </div>
   </div>
 </div>
 
-<!-- LISTINGS GRID -->
-<div class="container mt-4">
-  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+<!-- ---------- LISTINGS GRID ---------- -->
+<div class="container">
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
     <% for(let listing of allListings) { %>
       <div class="col">
         <a href="/listings/<%= listing._id %>" class="listing-link">
-          <div class="card listing-card shadow-sm">
-            <div class="card-img-wrapper position-relative">
+          <div class="card listing-card">
+            <div class="card-img-wrapper">
               <img
                 src="<%= listing.image.url %>"
                 class="card-img-top"
@@ -196,14 +242,16 @@
             </div>
 
             <div class="card-body">
-              <h5 class="listing-title"><%= listing.title %></h5>
-              <p class="listing-subtext">
-                <i class="fa-solid fa-location-dot me-1"></i>
-                <%= listing.location || "India" %>
-              </p>
-              <p class="listing-price mb-0">
-                <span class="tax-info d-none">+18% GST included</span>
-              </p>
+              <div>
+                <h5 class="listing-title"><%= listing.title %></h5>
+                <p class="listing-subtext">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <%= listing.location || "India" %>
+                </p>
+                <p class="listing-price mb-0">
+                  <span class="tax-info d-none">+18% GST included</span>
+                </p>
+              </div>
             </div>
           </div>
         </a>
